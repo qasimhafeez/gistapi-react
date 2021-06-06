@@ -1,17 +1,31 @@
-import React from 'react'
-import styled from 'styled-components'
-import Octicon from 'react-octicon'
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import Octicon from "react-octicon";
+
+// Importing actions
+import useAction from "../actions/gistAction";
 
 const Search = () => {
+  const [userName, setUserName] = useState("");
+  const { fetchSingleGistByUserName } = useAction();
+  useEffect(() => {
+    if (username) {
+      fetchSingleGistByUserName(username);
+    }
+  }, [username]);
   return (
     <Wrapper>
       <InputBox>
-      <Octicon name="search" />
-      <Input placeholder="Search Gists for the username"/>
+        <Octicon name="search" />
+        <Input
+          placeholder="Search Gists for the username"
+          value={usernmae}
+          onChange={(e) => setUsername(e.target.value)}
+        />
       </InputBox>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   padding: 8px;
@@ -33,9 +47,9 @@ const Input = styled.input`
   width: 100%;
   font-size: 16px;
 
-  &:focus{
+  &:focus {
     outline: 0;
   }
 `;
 
-export default Search
+export default Search;
