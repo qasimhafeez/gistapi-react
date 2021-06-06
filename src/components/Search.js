@@ -9,18 +9,18 @@ const Search = () => {
   const [userName, setUserName] = useState("");
   const { fetchSingleGistByUserName } = useAction();
   useEffect(() => {
-    if (username) {
-      fetchSingleGistByUserName(username);
+    if (userName) {
+      fetchSingleGistByUserName(userName);
     }
-  }, [username]);
+  }, [userName]);
   return (
     <Wrapper>
       <InputBox>
         <Octicon name="search" />
         <Input
           placeholder="Search Gists for the username"
-          value={usernmae}
-          onChange={(e) => setUsername(e.target.value)}
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
         />
       </InputBox>
     </Wrapper>
