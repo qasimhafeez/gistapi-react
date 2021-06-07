@@ -1,24 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import Gists from "./Gist";
+import Gist from "./Gist";
 
 import useAction from "../actions/gistAction";
 
 const GistList = () => {
   const { fetchAllGists } = useAction();
 
-  // On page load fetch all the public gists
+  //fetch
   useEffect(() => {
     fetchAllGists();
   }, []);
 
-  // Redux Store
+  //redux store
   const gistsPublicList = useSelector((state) => state.gists.gistsPublicList);
   const singleGistByUserName = useSelector(
     (state) => state.gists.singleGistByUserName
   );
-
   const gistsPublicListError = useSelector(
     (state) => state.gists.gistsPublicListError
   );
@@ -29,11 +28,20 @@ const GistList = () => {
       {gistsPublicList?.map((gist, index) => (
         <Gist key={index} gist={gist} />
       ))}
+      {/* {singleGistByUserName && (
+				<section>
+					{singleGistByUserName?.map((gist, index) => (
+						<Gist key={index} gist={gist} />
+					))}
+				</section>
+			)} */}
     </RootGistsList>
   );
 };
 
 const RootGistsList = styled.section`
+  max-width: 500px;
+  margin: 0 auto;
   .error {
     color: "red";
   }
