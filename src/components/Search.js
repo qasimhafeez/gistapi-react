@@ -7,11 +7,13 @@ import useAction from "../actions/gistAction";
 const Search = () => {
   const [userName, setUserName] = useState("");
 
-  const { fetchSingleGistByUserName } = useAction();
+  const { fetchSingleGistByUserName, fetchAllGists } = useAction();
 
   useEffect(() => {
     if (userName) {
       fetchSingleGistByUserName(userName);
+    } else if (!userName || userName === "" || userName.length === 0) {
+      fetchAllGists();
     }
   }, [userName]);
 
