@@ -2,17 +2,19 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Octicon from "react-octicon";
 
-// Importing actions
 import useAction from "../actions/gistAction";
 
 const Search = () => {
   const [userName, setUserName] = useState("");
+
   const { fetchSingleGistByUserName } = useAction();
+
   useEffect(() => {
     if (userName) {
       fetchSingleGistByUserName(userName);
     }
   }, [userName]);
+
   return (
     <Wrapper>
       <InputBox>
