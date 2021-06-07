@@ -24,17 +24,13 @@ const GistList = () => {
 
   return (
     <RootGistsList>
-      <h6 className="error">{gistsPublicListError && gistsPublicListError}</h6>
-      {gistsPublicList?.map((gist, index) => (
-        <Gist key={index} gist={gist} />
-      ))}
-      {/* {singleGistByUserName && (
-				<section>
-					{singleGistByUserName?.map((gist, index) => (
-						<Gist key={index} gist={gist} />
-					))}
-				</section>
-			)} */}
+      <p className="error">{gistsPublicListError && gistsPublicListError}</p>
+      {singleGistByUserName.length !== 0 &&
+        singleGistByUserName?.map((gist, index) => (
+          <Gist key={index} gist={gist} />
+        ))}
+      {singleGistByUserName.length === 0 &&
+        gistsPublicList?.map((gist, index) => <Gist key={index} gist={gist} />)}
     </RootGistsList>
   );
 };
@@ -43,7 +39,7 @@ const RootGistsList = styled.section`
   max-width: 500px;
   margin: 0 auto;
   .error {
-    color: "red";
+    color: red;
   }
 `;
 
