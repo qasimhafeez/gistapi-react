@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import moment from "moment";
+//svg icons
+import { CommentsIcon, ForkIcon, StarIcon, FileIcon } from "../icons";
+
 const Gist = ({ gist }) => {
   const { owner, created_at, updated_at, description, files } = gist;
   return (
@@ -10,10 +13,21 @@ const Gist = ({ gist }) => {
           <h2>{owner?.login}</h2>
         </section>
         <section className="rightside">
-          <p>{files && Object.keys(files).length} Files</p>
-          <p>Forks</p>
-          <p>Comments</p>
-          <p>Stars</p>
+          <p>
+            {"< >"} {files && Object.keys(files).length} Files
+          </p>
+          <section className="rightcard">
+            <ForkIcon />
+            <p>Forks</p>
+          </section>
+          <section className="rightcard">
+            <CommentsIcon />
+            <p>Comments</p>
+          </section>
+          <section className="rightcard">
+            <StarIcon />
+            <p>Stars</p>
+          </section>
         </section>
       </section>
       <section className="dates">
@@ -23,7 +37,12 @@ const Gist = ({ gist }) => {
       <p className="description">{description}</p>
       <ul className="files">
         {files &&
-          Object.keys(files).map((file, index) => <li key={index}>{file}</li>)}
+          Object.keys(files).map((file, index) => (
+            <li key={index}>
+              <FileIcon />
+              {file}
+            </li>
+          ))}
       </ul>
     </RootGist>
   );
@@ -55,10 +74,17 @@ const RootGist = styled.section`
       justify-self: end;
       display: flex;
       align-items: center;
+      .rightcard {
+        display: flex;
+        align-items: center;
+        p {
+          margin-left: 3.5px;
+        }
+      }
       p {
         font-size: 10px;
         color: #28669c;
-        margin: 0 7px;
+        margin-right: 7px;
       }
     }
   }
@@ -85,6 +111,10 @@ const RootGist = styled.section`
       font-size: 10px;
       color: #28669c;
       margin-right: 12px;
+      svg {
+        padding-top: 1px;
+        margin-right: 3.5px;
+      }
     }
   }
 `;
