@@ -1,8 +1,19 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen, act } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByTestId('app')
-  expect(linkElement).toBeInTheDocument();
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () =>
+      Promise.resolve({
+        avatar_url: "https://avatars.githubusercontent.com/u/73064640?v=4",
+        login: "ibnpaul",
+      }),
+  })
+);
+
+describe("App", () => {
+  it("Get the gist by user", async () => {
+    await act(async () => render(<App />));
+    expect(screen.getByText("ibnpaul")).toBeInTheDocument();
+  });
 });
